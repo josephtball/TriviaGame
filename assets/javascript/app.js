@@ -152,6 +152,10 @@ var triviaGame = {
 	correct: 0,
 	incorrect: 0,
 	unanswered: 0,
+	// gif arrays
+	correctGif: ["correct-1", "correct-2", "correct-3","correct-4", "correct-5", "correct-6","correct-7", "correct-8","correct-9", "correct-10",],
+	wrongGif: ["wrong-1", "wrong-2", "wrong-3","wrong-4", "wrong-5", "wrong-6","wrong-7", "wrong-8","wrong-9", "wrong-10",],
+	timeGif: ["time-1", "time-2", "time-3","time-4", "time-5", "time-6","time-7", "time-8","time-9", "time-10",],
 	// start game function
 	start: function() {
 		$("#triviaArea").empty();
@@ -198,14 +202,20 @@ var triviaGame = {
 	answer: function() {
 		$(".answers").click(function() {
 			clearInterval(intervalId);
+			// variable to store random gif
+			var gif;
 			if ($(this).attr("value") === triviaGame.trivia[triviaGame.random].correctAns) {
 				$("#questionArea").empty();
 				$("#questionArea").append("<h2>Correct!</h2>");
+				gif = triviaGame.correctGif[Math.floor(Math.random()*triviaGame.correctGif.length)];
+				$("#questionArea").append("<img class='img-responsive center-block' src='assets/images/"+ gif +".gif'>");
 				triviaGame.correct++;
 			} else {
 				$("#questionArea").empty();
 				$("#questionArea").append("<h2>Nope!</h2>");
 				$("#questionArea").append("<h3>The correct answer was: " + triviaGame.trivia[triviaGame.random].correctAns + "</h3>");
+				gif = triviaGame.wrongGif[Math.floor(Math.random()*triviaGame.wrongGif.length)];
+				$("#questionArea").append("<img class='img-responsive center-block' src='assets/images/"+ gif +".gif'>");
 				triviaGame.incorrect++;
 			}
 			triviaGame.number++;
@@ -220,9 +230,13 @@ var triviaGame = {
 	// out of time function
 	outOfTime: function() {
 		clearInterval(intervalId);
+		// variable to store random gif
+		var gif;
 		$("#questionArea").empty();
 		$("#questionArea").append("<h2>Out Of Time!</h2>");
 		$("#questionArea").append("<h3>The correct answer was: " + triviaGame.trivia[triviaGame.random].correctAns + "</h3>");
+		gif = triviaGame.timeGif[Math.floor(Math.random()*triviaGame.timeGif.length)];
+		$("#questionArea").append("<img class='img-responsive center-block' src='assets/images/"+ gif +".gif'>");
 		triviaGame.unanswered++;
 		triviaGame.number++;
 		if (triviaGame.number === 10) {

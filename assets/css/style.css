@@ -27,6 +27,9 @@ h1 {
 button {
 	margin-top: 15px;
 }
+img {
+	max-height: 280px;
+}
 
 /* sticky footer */
 html {
